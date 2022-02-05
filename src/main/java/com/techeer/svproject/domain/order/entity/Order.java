@@ -15,6 +15,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @NoArgsConstructor
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(generator = "uuid2")
