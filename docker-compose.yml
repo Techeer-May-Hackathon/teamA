@@ -1,6 +1,12 @@
 version: "3.9"
 services:
-#  springboot:
+  springboot:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo:latest
