@@ -9,7 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -31,23 +31,13 @@ public class Order {
 //    private Set<Product> products = new HashSet<>();
 
     /** 주문 날짜 */
-    @Column(name = "`orderDate`")
     @CreationTimestamp
-    private Date orderDate;
+    private LocalDateTime orderDate;
 
     @Builder
     public Order(
             User user,
-            Date orderDate) {
-        this.user = user;
-        this.orderDate = orderDate;
-    }
-
-    public void update(
-            User user,
-            Date orderDate
-           //, Set<Product> products
-            ) {
+            LocalDateTime orderDate) {
         this.user = user;
         this.orderDate = orderDate;
     }
