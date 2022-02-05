@@ -19,7 +19,7 @@ public class Address {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID address_id;
+    private UUID addressId;
 
     @Column(nullable = false)
     private String state;
@@ -34,7 +34,7 @@ public class Address {
     private int zipcode;
 
     @Builder
-    public Address(String state, String city, String street, int zipcode){
+    public Address(String state, String city, String street, int zipcode) {
         this.state = state;
         this.city = city;
         this.street = street;

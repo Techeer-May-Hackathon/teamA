@@ -10,17 +10,16 @@ import org.springframework.data.repository.query.Param;
 public interface AddressRepository extends JpaRepository<Address, UUID>{
     // 주소 추가
 
-
     // 주소 조회
     @Query(value="SELECT * FROM address s WHERE s.address_id = :address_id", nativeQuery = true)
-    List <Address> searchAddress(@Param("address_id")int address_id);
+    List <Address> readAddress(@Param("address_id")int address_id);
 
     // 주소 수정
     @Transactional
     @Modifying
-    @Query(value="UPDATE address s SET s.course_done =:course_done WHERE s.user_no = :user_no and s.course_id =:course_id",
+    @Query(value="UPDATE address s SET s.state =:state s.street =:street and s.city =:city and s.zipcode =:zipcode WHERE s.address_id =:address_id",
             nativeQuery = true)
-    void updateAddress(@Param("course_done")Boolean course_done,@Param("user_no")int user_no,@Param("course_id")int course_id);
+    void updateAddress(@Param("state")String state,@Param("street")String street,@Param("city")String city,@Param("zipcode")int zipcode,@Param("address_id")UUID address_id);
 
     //주소 삭제
     @Query(value="DELETE FROM address s WHERE s.address_id = :address_id;", nativeQuery = true)
