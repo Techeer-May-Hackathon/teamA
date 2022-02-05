@@ -1,5 +1,6 @@
 package com.techeer.svproject.domain.user.controller;
 
+import com.techeer.svproject.domain.address.service.AddressService;
 import com.techeer.svproject.domain.user.service.UserService;
 import com.techeer.svproject.domain.user.dto.UserSaveDto;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +16,13 @@ import static com.techeer.svproject.global.utils.Constants.API_PREFIX;
 @RestController
 public class UserController {
     private final UserService userService;
+    private final AddressService addressService;
 
     @PostMapping(API_PREFIX + "/users")
-    public UUID save(@RequestBody UserSaveDto requestDTO) {
+    public UUID save(
+            @RequestBody
+            UserSaveDto requestDTO
+    ) {
         return userService.save(requestDTO);
     }
 }
