@@ -1,5 +1,6 @@
-package com.techeer.svproject.domain.user;
+package com.techeer.svproject.domain.user.controller;
 
+import com.techeer.svproject.domain.user.service.UserService;
 import com.techeer.svproject.domain.user.dto.UserSaveDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,8 @@ import static com.techeer.svproject.global.utils.Constants.API_PREFIX;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping(API_PREFIX+"/users")
-    public UUID save(@RequestBody UserSaveDto requestDTO) {return userService.save(requestDTO);}
+    @PostMapping(API_PREFIX + "/users")
+    public UUID save(@RequestBody UserSaveDto requestDTO) {
+        return userService.save(requestDTO);
+    }
 }

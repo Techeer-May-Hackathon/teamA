@@ -13,8 +13,9 @@ public class UserSaveDto {
     private String email;
     private String password;
     private Integer phone_number;
+
     @Builder
-    public UserSaveDto(String last_name, String first_name, String email, String password, Integer phone_number){
+    public UserSaveDto(String last_name, String first_name, String email, String password, Integer phone_number) {
         this.last_name = last_name;
         this.first_name = first_name;
         this.email = email;
@@ -22,7 +23,7 @@ public class UserSaveDto {
         this.phone_number = phone_number;
     }
 
-    public User toEntity(){
+    public User toEntity() {
         return User.builder()
                 .first_name(first_name)
                 .last_name(last_name)

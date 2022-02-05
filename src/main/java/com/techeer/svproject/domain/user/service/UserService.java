@@ -1,5 +1,6 @@
-package com.techeer.svproject.domain.user;
+package com.techeer.svproject.domain.user.service;
 
+import com.techeer.svproject.domain.user.UserRepository;
 import com.techeer.svproject.domain.user.dto.UserSaveDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,5 +14,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public UUID save(UserSaveDto userSaveDto) {return userRepository.save(userSaveDto.toEntity()).getId();}
+    public UUID save(UserSaveDto userSaveDto) {
+        return userRepository.save(userSaveDto.toEntity()).getId();
+    }
 }
