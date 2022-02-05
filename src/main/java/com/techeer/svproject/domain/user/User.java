@@ -22,4 +22,16 @@ public class User {
 
     @Column(nullable = false)
     private String first_name;
+
+    @Column(nullable = false)
+    private String last_name;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private int phone_number;
 }
