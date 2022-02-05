@@ -1,5 +1,6 @@
 package com.techeer.svproject.domain.user;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -33,5 +34,15 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private int phone_number;
+    private Integer phone_number;
+
+    @Builder
+    public User(String last_name, String first_name, String email, String password, Integer phone_number) {
+        this.last_name = last_name;
+        this.first_name = first_name;
+        this.email = email;
+        this.password = password;
+        this.phone_number = phone_number;
+    }
+
 }
