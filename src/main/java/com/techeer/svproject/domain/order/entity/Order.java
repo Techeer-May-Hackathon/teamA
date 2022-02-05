@@ -1,6 +1,6 @@
 package com.techeer.svproject.domain.order.entity;
 
-import com.techeer.svproject.domain.products.Product;
+import com.techeer.svproject.domain.products.entity.Product;
 import com.techeer.svproject.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "order-list")
+@Table(name = "orderlist")
 public class Order {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -28,6 +28,7 @@ public class Order {
     @Setter
     @ManyToOne
     private User user;
+
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Product> products;
