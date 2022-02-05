@@ -24,10 +24,10 @@ public class User {
     private UUID id;
 
     @Column(nullable = false)
-    private String first_name;
+    private String firstName;
 
     @Column(nullable = false)
-    private String last_name;
+    private String lastName;
 
     @Column(nullable = false)
     private String email;
@@ -36,7 +36,7 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private Integer phone_number;
+    private Integer phoneNumber;
 
     @Setter
     @OneToOne(cascade = CascadeType.ALL)
@@ -48,12 +48,12 @@ public class User {
     private Set<Order> orders;
 
     @Builder
-    public User(String last_name, String first_name, String email, String password, Integer phone_number, Address address) {
-        this.last_name = last_name;
-        this.first_name = first_name;
+    public User(String lastName, String firstName, String email, String password, Integer phoneNumber, Address address) {
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.email = email;
         this.password = password;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.address = address;
     }
 

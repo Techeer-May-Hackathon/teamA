@@ -22,10 +22,10 @@ public class UserService {
         String encodedPassword = Hashing.sha256().hashString(userSaveDto.getPassword(), StandardCharsets.UTF_8).toString();
 
         User user = User.builder()
-                .first_name(userSaveDto.getFirst_name())
-                .last_name(userSaveDto.getLast_name())
+                .firstName(userSaveDto.getFirstName())
+                .lastName(userSaveDto.getLastName())
                 .email(userSaveDto.getEmail())
-                .phone_number(userSaveDto.getPhone_number())
+                .phoneNumber(userSaveDto.getPhoneNumber())
                 .password(encodedPassword)
                 .build();
         user.setAddress(userSaveDto.getAddress().toEntity());
