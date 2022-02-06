@@ -9,11 +9,11 @@ import java.util.UUID;
 @Getter
 @Builder
 public class UserResponseIdDto {
-    private UUID Id;
+    private UUID id;
 
     public static UserResponseIdDto fromEntity(UUID id){
         return UserResponseIdDto.builder()
-                .Id(id)
+                .id(id)
                 .build();
     }
 }
