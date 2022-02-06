@@ -4,6 +4,7 @@ import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.techeer.svproject.domain.user.User;
 import com.techeer.svproject.domain.user.UserRepository;
+import com.techeer.svproject.domain.user.dto.UserRequestUpdateDto;
 import com.techeer.svproject.domain.user.dto.UserResponseDto;
 import com.techeer.svproject.domain.user.dto.UserSaveDto;
 import lombok.RequiredArgsConstructor;
@@ -59,5 +60,22 @@ public class UserService {
 
     public boolean checkEmailDuplicate(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    @Transactional
+    public void delete(String email) {
+        User user = userRepository.findByEmail(email);
+
+        userRepository.delete(user);
+    }
+
+    public UUID update(String email, UserRequestUpdateDto requestDto){
+        User user = userRepository.findByEmail(email);
+        user.update(requestDto.getLastName(), requestDto.getFirstName(),
+                requestDto.getPassword(), requestDto.getPhoneNumber(),
+                requestDto.getAddress());
+        userRepository.save(user);
+        return user.getId();
+
     }
 }
