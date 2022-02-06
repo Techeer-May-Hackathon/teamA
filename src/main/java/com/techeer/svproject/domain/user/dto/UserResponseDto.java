@@ -33,14 +33,14 @@ public class UserResponseDto {
         this.address = entity.getAddress();
     }
 
-//    public static UserResponseDto fromEntity(User user) {
-//        return UserResponseDto.builder()
-//                .firstName(user.getFirstName())
-//                .Id(user.getId())
-//                .lastName(user.getLastName())
-//                .email(user.getEmail())
-//                .phoneNumber(user.getPhoneNumber())
-//                .address(user.getAddress())
-//                .build();
-//    }
+    public static UserResponseDto fromEntity(User user) {
+        return UserResponseDto.builder()
+                .firstName(user.getFirstName())
+                .Id(user.getId())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .address(user.getAddress())
+                .build();
+    }
 }

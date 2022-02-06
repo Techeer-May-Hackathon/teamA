@@ -20,11 +20,11 @@ public class UserController {
     private final AddressService addressService;
 
     @PostMapping(API_PREFIX + "/users")
-    public UUID save(
-            @RequestBody
-            UserSaveDto requestDTO
-    ) {
-        return userService.save(requestDTO);
+    public String save(@RequestBody UserSaveDto requestDTO) {
+        if(userService.checkEmailDuplicate(requestDTO.getEmail())){
+            return "이메일이 이미 존재합니다.";
+        }else{
+        return userService.save(requestDTO).toString();}
     }
 
     @GetMapping(API_PREFIX + "/users")
@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping(API_PREFIX + "/users/{email}")
-    public List<UserResponseDto> find (@PathVariable String email){
+    public UserResponseDto find (@PathVariable String email){
         return userService.findByEmail(email);
     }
 

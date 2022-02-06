@@ -42,8 +42,13 @@ public class UserService {
     }
 
     @Transactional
-    public List<UserResponseDto> findByEmail (String email) {
-        List<UserResponseDto> user = userRepository.findALLByEmail(email).stream().map(UserResponseDto::new).collect(Collectors.toList());
-        return user;
+    public UserResponseDto findByEmail (String email) {
+        User user = userRepository.findALLByEmail(email);
+
+        return UserResponseDto.fromEntity(user);
+    }
+
+    public boolean checkEmailDuplicate(String email) {
+        return userRepository.existsByEmail(email);
     }
 }
