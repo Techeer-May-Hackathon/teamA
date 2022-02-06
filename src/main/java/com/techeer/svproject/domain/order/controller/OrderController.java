@@ -1,5 +1,7 @@
 package com.techeer.svproject.domain.order.controller;
 
+import com.techeer.svproject.domain.address.Address;
+import com.techeer.svproject.domain.address.dto.request.AddressUpdateDto;
 import com.techeer.svproject.domain.order.dto.OrderCreateDto;
 import com.techeer.svproject.domain.order.dto.OrderMapper;
 import com.techeer.svproject.domain.order.dto.OrderResponseDto;
@@ -61,7 +63,7 @@ public class OrderController {
               .map(orderMapper::toResponseDto)
               .collect(Collectors.toList());
       try {
-            return new ResponseEntity<>(entity, HttpStatus.CREATED);
+            return new ResponseEntity<>(entity, HttpStatus.ACCEPTED);
         }
         catch(Exception e) {
             return new ResponseEntity(ErrorResponseDto.fromEntity("FORBIDDEN", "주문 목록 조회에 오류가 발생하였습니다."), HttpStatus.BAD_REQUEST);
