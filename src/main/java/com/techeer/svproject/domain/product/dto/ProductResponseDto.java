@@ -13,12 +13,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class ProductResponseDto {
-    private UUID Id;
+    private UUID id;
     private int price;
     private String productName;
 
     public ProductResponseDto(Product entity){
-        this.Id = entity.getId();
+        this.id = entity.getId();
         this.price = entity.getPrice();
         this.productName = entity.getProductName();
     }

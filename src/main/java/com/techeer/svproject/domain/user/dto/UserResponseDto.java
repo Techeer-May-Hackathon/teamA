@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class UserResponseDto {
-    private UUID Id;
+    private UUID id;
     private String firstName;
     private String lastName;
     private String email;
@@ -23,7 +23,7 @@ public class UserResponseDto {
     private Address address;
 
     public UserResponseDto(User entity){
-        this.Id = entity.getId();
+        this.id = entity.getId();
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
