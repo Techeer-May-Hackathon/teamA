@@ -32,7 +32,6 @@ public class UserController {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(UserResponseIdDto.fromEntity(this.userService.save(requestDTO)));
-//                            Map.of("id", this.userService.save(requestDTO)));
         }
         catch(Exception e){
             if(userService.checkEmailDuplicate(requestDTO.getEmail())) {
