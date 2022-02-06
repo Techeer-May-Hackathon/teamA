@@ -23,6 +23,7 @@ public class OrderController {
         return OrderDto.fromEntity(order);
     }
 
+    @ResponseBody
     @GetMapping(API_PREFIX+"/orders/{id}")
     public ResponseEntity getDetail(@PathVariable UUID id) {
 
