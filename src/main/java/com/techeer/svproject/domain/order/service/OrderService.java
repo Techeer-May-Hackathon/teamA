@@ -6,12 +6,13 @@ import com.techeer.svproject.domain.user.User;
 import com.techeer.svproject.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.util.List;
 import java.util.UUID;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
@@ -23,8 +24,14 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Order findById(UUID id) {
-       return orderRepository.findById(id).get();
+        return orderRepository.findById(id).get();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Order> findAllByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return orderRepository.findAllByUserId(user.getId());
     }
 }
