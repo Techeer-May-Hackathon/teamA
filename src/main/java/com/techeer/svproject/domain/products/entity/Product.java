@@ -30,11 +30,11 @@ public class Product {
 //    private UUID orderId;
 
     /**상품 가격**/
-    @Column(nullable = false)
+    @Column(length = 15)
     private int price;
 
     /**상품 이름**/
-    @Column(nullable = false)
+    @Column(length = 50)
     private String productName;
 
     @Builder
