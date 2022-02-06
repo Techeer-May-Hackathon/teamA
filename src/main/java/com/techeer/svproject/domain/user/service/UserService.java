@@ -46,7 +46,7 @@ public class UserService {
 
     @Transactional
     public UserResponseDto findByEmail (String email) {
-        User user = userRepository.findALLByEmail(email);
+        User user = userRepository.findByEmail(email);
 
         return UserResponseDto.fromEntity(user);
     }
