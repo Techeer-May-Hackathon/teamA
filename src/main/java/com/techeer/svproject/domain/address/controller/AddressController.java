@@ -1,6 +1,7 @@
 package com.techeer.svproject.domain.address.controller;
 import com.techeer.svproject.domain.address.Address;
 import com.techeer.svproject.domain.address.dto.request.AddressDeleteDto;
+import com.techeer.svproject.domain.address.dto.request.AddressReadDto;
 import com.techeer.svproject.domain.address.dto.request.AddressUpdateDto;
 import com.techeer.svproject.domain.address.service.AddressService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,12 @@ public class AddressController {
 
     // 조회
     @GetMapping(API_PREFIX +"/address-list")
-    public void getAddress(@RequestParam String userEmail) {
-        addressService.getAddress(userEmail);
+    public ResponseEntity getAddress(@RequestParam String userEmail) {
+        Address address = addressService.getAddress(userEmail);
+        AddressReadDto adReadDto = new AddressReadDto();
+        return ResponseEntity
+                .ok()
+                .body(adReadDto.fromEntity(address));
     }
 
     // 수정
@@ -34,11 +39,5 @@ public class AddressController {
         return ResponseEntity
                 .ok()
                 .body(adUpdateDto.fromEntity(address));
-    }
-
-    // 삭제
-    @DeleteMapping(API_PREFIX +"/address-list/{address-id}")
-    public void deleteAddress(@PathVariable(value = "address-id") UUID addressId) {
-        addressService.deleteAddress(addressId);
     }
 }

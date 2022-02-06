@@ -29,15 +29,10 @@ public class AddressService {
         return addressRepository.save(addressCreateDto.toEntity()).getAddressId();
     }
 
-    // User Address 삭제
-    public void deleteAddress(UUID addressId){
-        Address address = addressRepository.getById(addressId);
-        addressRepository.delete(address);
-    }
-
     // User Address 조회
-    public void getAddress(String email){
+    public Address getAddress(String email){
         User user = userRepository.findByEmail(email);
         Address address = user.getAddress();
+        return address;
     }
 }
