@@ -1,7 +1,7 @@
 package com.techeer.svproject.domain.user.dto;
 
 import com.techeer.svproject.domain.address.Address;
-import com.techeer.svproject.domain.address.dto.AddressCreateDto;
+import com.techeer.svproject.domain.address.dto.request.AddressCreateDto;
 import com.techeer.svproject.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
