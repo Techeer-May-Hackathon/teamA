@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -37,8 +38,20 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<UserResponseDto> findAll() {
-        return userRepository.findAll().stream().map(UserResponseDto::new).collect(Collectors.toList());
+        return userRepository.findAll()
+                .stream()
+                .map(UserResponseDto::new)
+                .collect(Collectors.toList());
     }
 
-    
+    @Transactional
+    public UserResponseDto findByEmail (String email) {
+        User user = userRepository.findByEmail(email);
+
+        return UserResponseDto.fromEntity(user);
+    }
+
+    public boolean checkEmailDuplicate(String email) {
+        return userRepository.existsByEmail(email);
+    }
 }

@@ -2,6 +2,8 @@ package com.techeer.svproject.domain.user.dto;
 
 import com.techeer.svproject.domain.address.Address;
 import com.techeer.svproject.domain.address.dto.request.AddressCreateDto;
+import com.techeer.svproject.domain.order.dto.OrderDto;
+import com.techeer.svproject.domain.order.entity.Order;
 import com.techeer.svproject.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,5 +31,21 @@ public class UserResponseDto {
         this.email = entity.getEmail();
         this.phoneNumber = entity.getPhoneNumber();
         this.address = entity.getAddress();
+    }
+
+    public static UserResponseDto fromEntity(User user) {
+        return UserResponseDto.builder()
+                .firstName(user.getFirstName())
+                .id(user.getId())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .address(user.getAddress())
+                .build();
+    }
+    public static UserResponseDto fromEntity(UUID id) {
+        return UserResponseDto.builder()
+                .id(id)
+                .build();
     }
 }
