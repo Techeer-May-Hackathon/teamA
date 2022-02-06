@@ -1,9 +1,14 @@
 package com.techeer.svproject.domain.order.controller;
 
-import com.techeer.svproject.domain.order.dto.OrderDto;
+import com.techeer.svproject.domain.order.dto.OrderCreateDto;
+import com.techeer.svproject.domain.order.dto.OrderMapper;
+import com.techeer.svproject.domain.order.dto.OrderResponseDto;
 import com.techeer.svproject.domain.order.entity.Order;
 import com.techeer.svproject.domain.order.service.OrderService;
+import com.techeer.svproject.domain.user.User;
+import com.techeer.svproject.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,24 +18,29 @@ import static com.techeer.svproject.global.utils.Constants.API_PREFIX;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping(API_PREFIX+"/orders")
 public class OrderController {
+
     private final OrderService orderService;
+    private final UserService userService;
+    private final OrderMapper orderMapper;
 
     @ResponseBody
-    @PostMapping(API_PREFIX + "/orders")
-    public OrderDto save(@RequestBody OrderDto orderDto) {
-        Order order = orderService.save(orderDto);
-        return OrderDto.fromEntity(order);
+    @PostMapping
+    public ResponseEntity<OrderResponseDto> save(@RequestBody OrderCreateDto requestDto) {
+        User user = userService.findById(requestDto.getUserId());
+        Order entity = orderService.save(orderMapper.toEntity(requestDto), user);
+        return new ResponseEntity<>(orderMapper.toResponseDto(entity), HttpStatus.CREATED);
     }
 
     @ResponseBody
-    @GetMapping(API_PREFIX+"/orders/{id}")
-    public ResponseEntity getDetail(@PathVariable UUID id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderResponseDto> getDetail(@PathVariable UUID id) {
 
         Order entity = orderService.findById(id);
 
         return ResponseEntity
                 .ok()
-                .body(OrderDto.fromEntity(entity));
+                .body(orderMapper.toResponseDto(entity));
     }
 }

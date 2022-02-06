@@ -1,6 +1,5 @@
 package com.techeer.svproject.domain.order.service;
 
-import com.techeer.svproject.domain.order.dto.OrderDto;
 import com.techeer.svproject.domain.order.entity.Order;
 import com.techeer.svproject.domain.order.repository.OrderRepository;
 import com.techeer.svproject.domain.user.User;
@@ -18,9 +17,8 @@ public class OrderService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Order save(OrderDto orderDto) {
-        Order order = orderDto.toEntity();
-        User user = userRepository.findById(orderDto.getUserId()).get();
+    public Order save(Order entity, User user) {
+        Order order = entity;
         order.setUser(user);
         return orderRepository.save(order);
     }
