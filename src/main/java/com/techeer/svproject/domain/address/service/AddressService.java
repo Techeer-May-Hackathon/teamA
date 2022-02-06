@@ -27,7 +27,7 @@ public class AddressService {
     }
 
     // User Address 삭제
-    public void deleteAddress(UUID addressId, AddressDeleteDto addressDeleteDto){
+    public void deleteAddress(UUID addressId){
         Address address = addressRepository.getById(addressId);
         addressRepository.delete(address);
     }

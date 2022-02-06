@@ -37,8 +37,7 @@ public class AddressController {
 
     // 삭제
     @DeleteMapping(API_PREFIX +"/address-list/{address-id}")
-    public void deleteAddress(@PathVariable(value = "address-id") UUID addressId,
-                              @RequestBody AddressDeleteDto adDeleteDto) {
-        addressService.deleteAddress(addressId, adDeleteDto);
+    public void deleteAddress(@PathVariable(value = "address-id") UUID addressId) {
+        addressService.deleteAddress(addressId);
     }
 }

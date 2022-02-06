@@ -26,5 +26,4 @@ public class AddressUpdateDto {
                 .zipcode(ads.getZipcode())
                 .build();
     }
-
 }
