@@ -1,5 +1,4 @@
 package com.techeer.svproject.domain.address;
-
 import lombok.Builder;
 import lombok.Setter;
 import lombok.Getter;

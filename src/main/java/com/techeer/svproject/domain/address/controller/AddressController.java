@@ -1,6 +1,5 @@
 package com.techeer.svproject.domain.address.controller;
 import com.techeer.svproject.domain.address.Address;
-import com.techeer.svproject.domain.address.dto.request.AddressDeleteDto;
 import com.techeer.svproject.domain.address.dto.request.AddressReadDto;
 import com.techeer.svproject.domain.address.dto.request.AddressUpdateDto;
 import com.techeer.svproject.domain.address.service.AddressService;
