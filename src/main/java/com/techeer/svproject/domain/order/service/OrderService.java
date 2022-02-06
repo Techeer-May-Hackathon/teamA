@@ -24,4 +24,9 @@ public class OrderService {
         order.setUser(user);
         return orderRepository.save(order);
     }
+
+    @Transactional
+    public Order findById(UUID id) {
+       return orderRepository.findById(id).get();
+    }
 }

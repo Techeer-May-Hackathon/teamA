@@ -12,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDto {
+    private UUID id;
     private UUID userId;
     private LocalDateTime orderDate;
 
@@ -23,6 +24,7 @@ public class OrderDto {
 
     public static OrderDto fromEntity(Order order) {
         return OrderDto.builder()
+                .id(order.getId())
                 .userId(order.getUser().getId())
                 .orderDate(order.getOrderDate())
                 .build();
