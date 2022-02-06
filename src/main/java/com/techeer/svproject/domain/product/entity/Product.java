@@ -1,4 +1,4 @@
-package com.techeer.svproject.domain.products.entity;
+package com.techeer.svproject.domain.product.entity;
 
 import com.techeer.svproject.domain.order.entity.Order;
 import lombok.Builder;
@@ -25,9 +25,6 @@ public class Product {
     @Setter
     @ManyToOne
     private Order order;
-
-//    @Column(nullable = false)
-//    private UUID orderId;
 
     /**상품 가격**/
     @Column(length = 15)

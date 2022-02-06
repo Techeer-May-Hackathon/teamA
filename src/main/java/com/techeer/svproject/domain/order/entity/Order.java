@@ -1,6 +1,6 @@
 package com.techeer.svproject.domain.order.entity;
 
-import com.techeer.svproject.domain.products.entity.Product;
+import com.techeer.svproject.domain.product.entity.Product;
 import com.techeer.svproject.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
