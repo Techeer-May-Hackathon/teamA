@@ -44,12 +44,18 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
-    public UserResponseDto findByEmail (String email) {
+    @Transactional(readOnly = true)
+    public UserResponseDto findByEmail(String email) {
         User user = userRepository.findByEmail(email);
-
         return UserResponseDto.fromEntity(user);
     }
+
+    @Transactional(readOnly = true)
+    public User findById(UUID userId) {
+        User user = userRepository.findById(userId).get();
+        return user;
+    }
+
 
     public boolean checkEmailDuplicate(String email) {
         return userRepository.existsByEmail(email);
