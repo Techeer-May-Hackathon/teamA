@@ -1,6 +1,8 @@
 package com.techeer.svproject.domain.products.service;
 
 import com.sun.istack.NotNull;
+import com.techeer.svproject.domain.order.entity.Order;
+import com.techeer.svproject.domain.order.repository.OrderRepository;
 import com.techeer.svproject.domain.products.dto.ProductSaveDto;
 import com.techeer.svproject.domain.products.entity.Product;
 import com.techeer.svproject.domain.products.repository.ProductRepository;
@@ -17,10 +19,14 @@ import java.util.UUID;
 public class ProductService {
 //    private final EntityManager em;
     private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
     @Transactional
-    public UUID save(ProductSaveDto productSaveDto){
-        return productRepository.save(productSaveDto.toEntity()).getId();
+    public Product save(ProductSaveDto productSaveDto){
+        Product product = productSaveDto.toEntity();
+        Order order = orderRepository.findById(productSaveDto.getOrderId()).get();
+        product.setOrder(order);
+        return productRepository.save(product);
     }
 
     /*
