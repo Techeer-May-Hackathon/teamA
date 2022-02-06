@@ -1,7 +1,7 @@
 package com.techeer.svproject.domain.user.dto;
 
 import com.techeer.svproject.domain.address.Address;
-import com.techeer.svproject.domain.address.dto.AddressCreateDto;
+import com.techeer.svproject.domain.address.dto.request.AddressCreateDto;
 import com.techeer.svproject.domain.order.dto.OrderDto;
 import com.techeer.svproject.domain.order.entity.Order;
 import com.techeer.svproject.domain.user.User;
@@ -36,7 +36,7 @@ public class UserResponseDto {
     public static UserResponseDto fromEntity(User user) {
         return UserResponseDto.builder()
                 .firstName(user.getFirstName())
-                .Id(user.getId())
+                .id(user.getId())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
@@ -45,7 +45,7 @@ public class UserResponseDto {
     }
     public static UserResponseDto fromEntity(UUID id) {
         return UserResponseDto.builder()
-                .Id(id)
+                .id(id)
                 .build();
     }
 }
