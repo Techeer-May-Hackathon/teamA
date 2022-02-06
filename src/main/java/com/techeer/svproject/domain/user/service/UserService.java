@@ -54,4 +54,11 @@ public class UserService {
     public boolean checkEmailDuplicate(String email) {
         return userRepository.existsByEmail(email);
     }
+
+    @Transactional
+    public void delete(String email) {
+        User user = userRepository.findByEmail(email);
+
+        userRepository.delete(user);
+    }
 }

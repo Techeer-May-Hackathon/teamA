@@ -57,4 +57,9 @@ public class UserController {
         return userService.findByEmail(email);
     }
 
+    @DeleteMapping(API_PREFIX + "/users/{email}")
+    public void delete(@PathVariable String email){
+        userService.delete(email);
+    }
+
 }
