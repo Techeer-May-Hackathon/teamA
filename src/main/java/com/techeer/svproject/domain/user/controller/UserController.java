@@ -1,6 +1,7 @@
 package com.techeer.svproject.domain.user.controller;
 
 import com.techeer.svproject.domain.address.service.AddressService;
+import com.techeer.svproject.domain.user.dto.UserRequestUpdateDto;
 import com.techeer.svproject.domain.user.dto.UserResponseDto;
 import com.techeer.svproject.domain.user.dto.UserResponseIdDto;
 import com.techeer.svproject.domain.user.service.UserService;
@@ -60,6 +61,11 @@ public class UserController {
     @DeleteMapping(API_PREFIX + "/users/{email}")
     public void delete(@PathVariable String email){
         userService.delete(email);
+    }
+
+    @PutMapping(API_PREFIX + "/users/{email}")
+    public UUID update(@PathVariable String email, @RequestBody UserRequestUpdateDto requestDto){
+        return userService.update(email, requestDto);
     }
 
 }
