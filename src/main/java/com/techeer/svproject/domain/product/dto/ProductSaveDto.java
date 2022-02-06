@@ -1,6 +1,6 @@
-package com.techeer.svproject.domain.products.dto;
+package com.techeer.svproject.domain.product.dto;
 
-import com.techeer.svproject.domain.products.entity.Product;
+import com.techeer.svproject.domain.product.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductSaveDto {
+    private UUID id;
     private UUID orderId;
     private int price;
     private String productName;
@@ -26,6 +27,7 @@ public class ProductSaveDto {
 
     public static ProductSaveDto fromEntity(Product product) {
         return ProductSaveDto.builder()
+                .id(product.getId())
                 .orderId(product.getOrder().getId())
                 .price(product.getPrice())
                 .productName(product.getProductName())
