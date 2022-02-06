@@ -57,4 +57,11 @@ public class User {
         this.address = address;
     }
 
+    public void update(String lastName, String firstName, String password, Integer phoneNumber, Address address) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
 }
