@@ -19,11 +19,12 @@ public class AddressController {
 //    public Address createaddress(@RequestBody addressDto new_address) {
 //    }
 //
-//    @GetMapping(API_PREFIX +"/address-list/{address-id}")
-//    public List <Address> readaddress(@RequestBody int user_id) {
-//        List<Address> ad = addressService.searchAddress(user_id);
-//        return ad;
-//    }
+
+    // 조회
+    @GetMapping(API_PREFIX +"/address-list?userEmail={user-email}")
+    public void getAddress(@PathVariable(value="user-email")String email) {
+        addressService.getAddress(email);
+    }
 
     // 수정
     @PutMapping(API_PREFIX +"/address-list/{address-id}")
