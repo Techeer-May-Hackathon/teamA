@@ -51,7 +51,7 @@ public class UserController {
             }
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("오류");
+                    .body(ErrorResponseDto.fromEntity("FORBIDDEN", "유저 생성에 오류가 발생하였습니다."));
         }
 
     }
