@@ -27,15 +27,6 @@ public class UserController {
     @PostMapping(API_PREFIX + "/users")
     public ResponseEntity save(@RequestBody UserSaveDto requestDTO) {
 
-        // 스프링은 너가 객체를 만들면 그 객체를 json 형태로 만들어줌.
-        // UUID -> String
-        // {
-        //   "id": "43223rjhekshfdskfj"
-        // }
-
-        // 1. Map으로 객체를 만들어준다
-        // 2. DTO를 만들어준다
-
         try {
 
             return ResponseEntity
