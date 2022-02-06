@@ -51,6 +51,14 @@ public class UserService {
         return UserResponseDto.fromEntity(user);
     }
 
+    @Transactional
+    public User findById (UUID userId) {
+        User user = userRepository.findById(userId).get();
+
+        return user;
+    }
+
+
     public boolean checkEmailDuplicate(String email) {
         return userRepository.existsByEmail(email);
     }
