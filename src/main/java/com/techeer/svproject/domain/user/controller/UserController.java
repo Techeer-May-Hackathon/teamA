@@ -6,10 +6,7 @@ import com.techeer.svproject.domain.user.service.UserService;
 import com.techeer.svproject.domain.user.dto.UserSaveDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,4 +32,10 @@ public class UserController {
         model.addAttribute("user", userService.findAll());
         return userService.findAll();
     }
+
+    @GetMapping(API_PREFIX + "/users/{email}")
+    public List<UserResponseDto> find (@PathVariable String email){
+        return userService.findByEmail(email);
+    }
+
 }
