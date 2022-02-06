@@ -21,9 +21,9 @@ public class AddressController {
 //
 
     // 조회
-    @GetMapping(API_PREFIX +"/address-list?userEmail={user-email}")
-    public void getAddress(@PathVariable(value="user-email")String email) {
-        addressService.getAddress(email);
+    @GetMapping(API_PREFIX +"/address-list")
+    public void getAddress(@RequestParam String userEmail) {
+        addressService.getAddress(userEmail);
     }
 
     // 수정
