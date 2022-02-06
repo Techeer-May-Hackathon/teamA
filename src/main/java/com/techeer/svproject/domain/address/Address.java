@@ -5,16 +5,15 @@ import lombok.Setter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import java.util.UUID;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "address")
 public class Address {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -35,6 +34,13 @@ public class Address {
 
     @Builder
     public Address(String state, String city, String street, int zipcode) {
+        this.state = state;
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
+
+    public void update(String state, String city, String street, int zipcode){
         this.state = state;
         this.city = city;
         this.street = street;

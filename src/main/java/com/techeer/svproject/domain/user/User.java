@@ -40,7 +40,7 @@ public class User {
 
     @Setter
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
     private Address address;
 
 
@@ -55,7 +55,6 @@ public class User {
         this.password = password;
         this.phone_number = phone_number;
         this.address = address;
-
     }
 
 }

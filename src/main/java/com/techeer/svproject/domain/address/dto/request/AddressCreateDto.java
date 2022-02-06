@@ -1,4 +1,4 @@
-package com.techeer.svproject.domain.address.dto;
+package com.techeer.svproject.domain.address.dto.request;
 import com.techeer.svproject.domain.address.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

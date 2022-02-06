@@ -11,17 +11,16 @@ public interface AddressRepository extends JpaRepository<Address, UUID>{
     // 주소 추가
 
     // 주소 조회
-    @Query(value="SELECT * FROM address s WHERE s.address_id = :address_id", nativeQuery = true)
-    List <Address> readAddress(@Param("address_id")int address_id);
+    @Query(value="SELECT * FROM address s WHERE s.addressId = :addressId", nativeQuery = true)
+    List <Address> readAddress(@Param("addressId")int addressId);
 
     // 주소 수정
     @Transactional
     @Modifying
-    @Query(value="UPDATE address s SET s.state =:state s.street =:street and s.city =:city and s.zipcode =:zipcode WHERE s.address_id =:address_id",
-            nativeQuery = true)
+    @Query(value="UPDATE address s SET s.state =:state and s.street =:street and s.city =:city and s.zipcode =:zipcode WHERE s.address_id =:address_id",nativeQuery = true)
     void updateAddress(@Param("state")String state,@Param("street")String street,@Param("city")String city,@Param("zipcode")int zipcode,@Param("address_id")UUID address_id);
 
     //주소 삭제
-    @Query(value="DELETE FROM address s WHERE s.address_id = :address_id;", nativeQuery = true)
-    void deleteAddress(@Param("address_id")int address_id);
+    @Query(value="DELETE FROM address s WHERE s.addressId = :addressId;", nativeQuery = true)
+    void deleteAddress(@Param("addressId")int addressId);
 }

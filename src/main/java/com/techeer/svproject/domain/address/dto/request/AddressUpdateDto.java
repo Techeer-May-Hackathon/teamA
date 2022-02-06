@@ -1,6 +1,5 @@
 package com.techeer.svproject.domain.address.dto.request;
 import com.techeer.svproject.domain.address.Address;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +23,6 @@ public class AddressUpdateDto {
         this.zipcode = zipcode;
     }
 
-    // 수정 DTO - Address
     public Address toEntity(AddressUpdateDto dto){
         return Address.builder()
                 .state(dto.getState())
