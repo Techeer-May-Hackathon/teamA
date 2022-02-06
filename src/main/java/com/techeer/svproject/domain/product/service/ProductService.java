@@ -7,7 +7,6 @@ import com.techeer.svproject.domain.product.dto.ProductSaveDto;
 import com.techeer.svproject.domain.product.entity.Product;
 import com.techeer.svproject.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +41,12 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public List<ProductResponseDto> findAllByOrderId(UUID id) {
-//        return productRepository.findByOrderId(id);
         return productRepository.findByOrderId(id).stream().map(ProductResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete(UUID id){
+        Product product = productRepository.findById(id).get();
+        productRepository.delete(product);
     }
 }
