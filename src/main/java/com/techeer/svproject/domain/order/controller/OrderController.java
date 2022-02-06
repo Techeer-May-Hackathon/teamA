@@ -46,9 +46,7 @@ public class OrderController {
     @ResponseBody
     @GetMapping("/{id}")
     public ResponseEntity<OrderResponseDto> getDetail(@PathVariable UUID id) {
-
         Order entity = orderService.findById(id);
-
         return ResponseEntity
                 .ok()
                 .body(orderMapper.toResponseDto(entity));
@@ -68,5 +66,16 @@ public class OrderController {
         catch(Exception e) {
             return new ResponseEntity(ErrorResponseDto.fromEntity("FORBIDDEN", "주문 목록 조회에 오류가 발생하였습니다."), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @ResponseBody
+    @DeleteMapping("/{id}")
+    public ResponseEntity<OrderResponseDto> deleteOrder(@PathVariable UUID id) {
+
+        orderService.delete(id);
+
+        return ResponseEntity
+                .ok()
+                .build();
     }
 }

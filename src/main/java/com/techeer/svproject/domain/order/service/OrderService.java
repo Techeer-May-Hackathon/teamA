@@ -34,4 +34,11 @@ public class OrderService {
         User user = userRepository.findByEmail(email);
         return orderRepository.findAllByUserId(user.getId());
     }
+
+    @Transactional
+    public void delete(UUID id) {
+        Order order = orderRepository.findById(id).get();
+//                .orElseThrow(
+//                        () -> new ("Developer profile not found with id=" + id));
+        orderRepository.delete(order);   }
 }
