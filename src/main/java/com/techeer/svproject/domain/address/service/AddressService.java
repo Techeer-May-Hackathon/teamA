@@ -37,10 +37,7 @@ public class AddressService {
 
     // User Address 조회
     public void getAddress(String email){
-        User user = userRepository.getByEmail(email);
+        User user = userRepository.findByEmail(email);
         Address address = user.getAddress();
-        System.out.println(address);
-        //Address address = addressRepository.getById(addressId);
-        // User-id -> User-email -> User-address_id -> Address
     }
 }
