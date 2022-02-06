@@ -1,5 +1,6 @@
 package com.techeer.svproject.domain.order.entity;
 
+import com.techeer.svproject.domain.products.entity.Product;
 import com.techeer.svproject.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,12 +11,13 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "orders")
+@Table(name = "orderlist")
 public class Order {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -27,9 +29,9 @@ public class Order {
     @ManyToOne
     private User user;
 
-//    @Setter
-//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-//    private Set<Product> products = new HashSet<>();
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<Product> products;
 
     /** 주문 날짜 */
     @CreationTimestamp
