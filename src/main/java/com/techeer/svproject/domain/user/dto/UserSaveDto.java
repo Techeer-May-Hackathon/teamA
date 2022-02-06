@@ -12,20 +12,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UserSaveDto {
-    private String last_name;
-    private String first_name;
+    private String lastName;
+    private String firstName;
     private String email;
     private String password;
-    private Integer phone_number;
+    private Integer phoneNumber;
     private AddressCreateDto address;
 
     public User toEntity() {
         return User.builder()
-                .first_name(first_name)
-                .last_name(last_name)
+                .firstName(firstName)
+                .lastName(lastName)
                 .email(email)
                 .password(password)
-                .phone_number(phone_number)
+                .phoneNumber(phoneNumber)
                 .build();
     }
 }

@@ -1,6 +1,6 @@
-package com.techeer.svproject.domain.products.repository;
+package com.techeer.svproject.domain.product.repository;
 
-import com.techeer.svproject.domain.products.entity.Product;
+import com.techeer.svproject.domain.product.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
