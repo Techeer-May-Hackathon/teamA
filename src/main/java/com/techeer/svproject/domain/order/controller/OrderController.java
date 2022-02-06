@@ -4,10 +4,8 @@ import com.techeer.svproject.domain.order.dto.OrderDto;
 import com.techeer.svproject.domain.order.entity.Order;
 import com.techeer.svproject.domain.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -23,5 +21,15 @@ public class OrderController {
     public OrderDto save(@RequestBody OrderDto orderDto) {
         Order order = orderService.save(orderDto);
         return OrderDto.fromEntity(order);
+    }
+
+    @GetMapping(API_PREFIX+"/orders/{id}")
+    public ResponseEntity getDetail(@PathVariable UUID id) {
+
+        Order entity = orderService.findById(id);
+
+        return ResponseEntity
+                .ok()
+                .body(OrderDto.fromEntity(entity));
     }
 }
