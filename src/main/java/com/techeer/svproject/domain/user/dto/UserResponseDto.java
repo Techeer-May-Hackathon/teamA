@@ -43,4 +43,9 @@ public class UserResponseDto {
                 .address(user.getAddress())
                 .build();
     }
+    public static UserResponseDto fromEntity(UUID id) {
+        return UserResponseDto.builder()
+                .Id(id)
+                .build();
+    }
 }
