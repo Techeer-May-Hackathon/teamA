@@ -1,12 +1,14 @@
 package com.techeer.svproject.domain.address.dto.request;
 import com.techeer.svproject.domain.address.Address;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.util.UUID;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class AddressUpdateDto {
     private UUID addressId;
@@ -15,20 +17,13 @@ public class AddressUpdateDto {
     private String street;
     private int zipcode;
 
-    @Builder
-    public AddressUpdateDto(String state, String city, String street, int zipcode) {
-        this.state = state;
-        this.city = city;
-        this.street = street;
-        this.zipcode = zipcode;
-    }
-
-    public Address toEntity(AddressUpdateDto dto){
-        return Address.builder()
-                .state(dto.getState())
-                .city(dto.getCity())
-                .street(dto.getStreet())
-                .zipcode(dto.getZipcode())
+    public static AddressUpdateDto fromEntity(Address ads){
+        return AddressUpdateDto.builder()
+                .addressId(ads.getAddressId())
+                .state(ads.getState())
+                .city(ads.getCity())
+                .street(ads.getStreet())
+                .zipcode(ads.getZipcode())
                 .build();
     }
 

@@ -3,12 +3,11 @@ import com.techeer.svproject.domain.address.Address;
 import com.techeer.svproject.domain.address.dto.request.AddressCreateDto;
 import com.techeer.svproject.domain.address.dto.request.AddressDeleteDto;
 import com.techeer.svproject.domain.address.dto.request.AddressUpdateDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.techeer.svproject.domain.address.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.UUID;
-
-import java.util.*;
 
 @Service
 public class AddressService {
@@ -16,13 +15,10 @@ public class AddressService {
     private AddressRepository addressRepository;
 
     // User Address 수정
-    public UUID updateAddress(UUID addressId, AddressUpdateDto adu){
+    public Address updateAddress(UUID addressId, AddressUpdateDto adu){
         Address address = addressRepository.getById(addressId);
         address.update(adu.getState(),adu.getCity(),adu.getStreet(),adu.getZipcode());
-        //addressRepository.updateAddress(astate,astreet,acity,azc,aid);
-        addressRepository.save(address);
-        System.out.println("Updated");
-        return addressId;
+        return addressRepository.save(address);
     }
 
     // User Address 생성
@@ -32,6 +28,7 @@ public class AddressService {
 
     // User Address 삭제
     public void deleteAddress(UUID addressId, AddressDeleteDto addressDeleteDto){
-        System.out.println("DELETED");
+        Address address = addressRepository.getById(addressId);
+        addressRepository.delete(address);
     }
 }

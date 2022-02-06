@@ -1,8 +1,10 @@
 package com.techeer.svproject.domain.address.controller;
+import com.techeer.svproject.domain.address.Address;
 import com.techeer.svproject.domain.address.dto.request.AddressDeleteDto;
 import com.techeer.svproject.domain.address.dto.request.AddressUpdateDto;
 import com.techeer.svproject.domain.address.service.AddressService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -25,17 +27,18 @@ public class AddressController {
 
     // 수정
     @PutMapping(API_PREFIX +"/address-list/{address-id}")
-    public UUID updateAddress(@PathVariable(value = "address-id") UUID addressId,
-                              @RequestBody AddressUpdateDto adUpdateDto) {
-        System.out.println(addressId);
-        System.out.println(adUpdateDto);
-        return addressService.updateAddress(addressId, adUpdateDto);
+    public ResponseEntity updateAddress(@PathVariable(value = "address-id") UUID addressId,
+                                        @RequestBody AddressUpdateDto adUpdateDto) {
+        Address address = addressService.updateAddress(addressId, adUpdateDto);
+        return ResponseEntity
+                .ok()
+                .body(adUpdateDto.fromEntity(address));
     }
 
     // 삭제
     @DeleteMapping(API_PREFIX +"/address-list/{address-id}")
     public void deleteAddress(@PathVariable(value = "address-id") UUID addressId,
-                              @RequestBody AddressDeleteDto addo) {
-        addressService.deleteAddress(addressId, addo);
+                              @RequestBody AddressDeleteDto adDeleteDto) {
+        addressService.deleteAddress(addressId, adDeleteDto);
     }
 }
