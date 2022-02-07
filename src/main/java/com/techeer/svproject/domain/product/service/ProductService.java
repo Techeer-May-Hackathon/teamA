@@ -4,9 +4,11 @@ import com.techeer.svproject.domain.order.entity.Order;
 import com.techeer.svproject.domain.order.repository.OrderRepository;
 import com.techeer.svproject.domain.product.dto.ProductResponseDto;
 import com.techeer.svproject.domain.product.dto.ProductSaveDto;
+import com.techeer.svproject.domain.product.dto.ProductUpdateDto;
 import com.techeer.svproject.domain.product.entity.Product;
 import com.techeer.svproject.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,13 @@ public class ProductService {
         Product product = productSaveDto.toEntity();
         Order order = orderRepository.findById(productSaveDto.getOrderId()).get();
         product.setOrder(order);
+        return productRepository.save(product);
+    }
+
+    @Transactional
+    public Product update(UUID id, ProductUpdateDto productUpdateDto){
+        Product product = productRepository.findById(id).get();
+        product.update(productUpdateDto.getPrice(), productUpdateDto.getProductName());
         return productRepository.save(product);
     }
 

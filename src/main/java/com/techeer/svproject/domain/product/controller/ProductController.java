@@ -1,9 +1,18 @@
 package com.techeer.svproject.domain.product.controller;
+import com.techeer.svproject.domain.address.Address;
+import com.techeer.svproject.domain.address.dto.request.AddressUpdateDto;
+import com.techeer.svproject.domain.order.dto.OrderCreateDto;
+import com.techeer.svproject.domain.order.dto.OrderResponseDto;
+import com.techeer.svproject.domain.order.entity.Order;
 import com.techeer.svproject.domain.product.dto.ProductResponseDto;
 import com.techeer.svproject.domain.product.dto.ProductSaveDto;
+import com.techeer.svproject.domain.product.dto.ProductUpdateDto;
 import com.techeer.svproject.domain.product.entity.Product;
 import com.techeer.svproject.domain.product.service.ProductService;
+import com.techeer.svproject.domain.user.User;
+import com.techeer.svproject.global.utils.dto.ErrorResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +46,18 @@ public class ProductController {
         return ResponseEntity
                 .ok()
                 .body(ProductSaveDto.fromEntity(entity.get()));
+    }
+
+    @ResponseBody
+    @PutMapping(API_PREFIX+"/products/{id}")
+    public ResponseEntity<OrderResponseDto> updateProduct(@PathVariable UUID id, @RequestBody ProductUpdateDto requestDto) {
+        Product entity = productService.update(id, requestDto);
+        try {
+            return new ResponseEntity(ProductUpdateDto.fromEntity(entity), HttpStatus.ACCEPTED);
+        }
+        catch(Exception e) {
+            return new ResponseEntity(ErrorResponseDto.fromEntity("FORBIDDEN", "상품 수정에 오류가 발생하였습니다."), HttpStatus.BAD_REQUEST);
+        }
     }
 
     /** 주문 목록 조회 **/

@@ -34,6 +34,12 @@ public class Product {
     @Column(length = 50)
     private String productName;
 
+
+    public void update(int price, String productName){
+        this.price = price;
+        this.productName = productName;
+    }
+
     @Builder
     public Product(
             Order order,
