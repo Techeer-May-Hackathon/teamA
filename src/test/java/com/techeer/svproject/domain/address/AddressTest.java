@@ -134,6 +134,7 @@ public class AddressTest {
     }
 
     @Test
+    @Transactional
     public void testUpdateAddress() throws Exception {
         // user POST
         UserPostDto userPostDto = getAddress();
