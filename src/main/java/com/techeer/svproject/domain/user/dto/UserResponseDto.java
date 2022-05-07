@@ -21,15 +21,6 @@ public class UserResponseDto {
     private Integer phoneNumber;
     private Address address;
 
-    public UserResponseDto(User entity) {
-        this.id = entity.getId();
-        this.firstName = entity.getFirstName();
-        this.lastName = entity.getLastName();
-        this.email = entity.getEmail();
-        this.phoneNumber = entity.getPhoneNumber();
-        this.address = entity.getAddress();
-    }
-
     public static UserResponseDto fromEntity(User user) {
         return UserResponseDto.builder()
                 .firstName(user.getFirstName())

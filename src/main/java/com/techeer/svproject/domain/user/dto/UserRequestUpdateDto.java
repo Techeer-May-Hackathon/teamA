@@ -1,11 +1,13 @@
 package com.techeer.svproject.domain.user.dto;
 
 import com.techeer.svproject.domain.address.Address;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserRequestUpdateDto {
     private String firstName;
     private String lastName;
@@ -13,11 +15,4 @@ public class UserRequestUpdateDto {
     private int phoneNumber;
     private Address address;
 
-    public UserRequestUpdateDto(String firstName, String lastName, String password, int phoneNumber, Address address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-    }
 }
