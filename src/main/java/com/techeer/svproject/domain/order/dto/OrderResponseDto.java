@@ -1,9 +1,6 @@
 package com.techeer.svproject.domain.order.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,6 +9,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class OrderResponseDto {
     private UUID id;
     private UUID userId;

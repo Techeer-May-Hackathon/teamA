@@ -30,10 +30,15 @@ public class ProductController {
      **/
     @ResponseBody
     @PostMapping
-    public ProductSaveDto save(@RequestBody ProductSaveDto productSaveDto) {
+    public ResponseEntity<ProductSaveDto> save(@RequestBody ProductSaveDto productSaveDto) {
         Product product = productService.save(productSaveDto);
-        return ProductSaveDto.fromEntity(product);
+        return new ResponseEntity<>(ProductSaveDto.fromEntity(product), HttpStatus.CREATED);
     }
+
+
+    //responseEntity-> 201port (위에 참조해서 밑에 바꿔주기 )
+
+
 
     /**
      * 상품 조회
