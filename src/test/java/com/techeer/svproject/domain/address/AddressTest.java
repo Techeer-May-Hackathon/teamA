@@ -9,12 +9,18 @@ import com.techeer.svproject.domain.user.dto.UserResponseIdDto;
 import com.techeer.svproject.domain.user.dto.UserSaveDto;
 import com.techeer.svproject.domain.user.service.UserService;
 import com.techeer.svproject.global.utils.JsonMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,8 +31,11 @@ import java.util.UUID;
 
 import static com.techeer.svproject.global.utils.Constants.API_PREFIX;
 
-@WebMvcTest(AddressController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class AddressTest {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(AddressTest.class);
+
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -41,6 +50,7 @@ public class AddressTest {
     private final String userPostPath = API_PREFIX + "/users";
 
     @Test
+    @Transactional
     public void testGetAddress() throws Exception {
         UserSaveDto userSaveDto = UserSaveDto.builder()
                 .firstName("jiho")
@@ -54,7 +64,6 @@ public class AddressTest {
                                 .zipcode(15010)
                                 .street("배곧").build())
                 .build();
-
 
 
         // user POST
@@ -74,13 +83,14 @@ public class AddressTest {
 
         assertThat(registered).isNotNull();
 
+        log.info(userSaveDto.toString());
+        log.info(registered.toString());
+
         // Check object fields
         assertThat(registered.getFirstName()).isEqualTo(userSaveDto.getFirstName());
         assertThat(registered.getLastName()).isEqualTo(userSaveDto.getLastName());
         assertThat(registered.getEmail()).isEqualTo(userSaveDto.getEmail());
         assertThat(registered.getPhoneNumber()).isEqualTo(userSaveDto.getPhoneNumber());
-        assertThat(registered.getAddress()).isEqualTo(userSaveDto.getAddress().toEntity());
-
 
 
         // Address GET

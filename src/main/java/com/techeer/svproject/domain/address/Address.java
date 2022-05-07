@@ -1,9 +1,7 @@
 package com.techeer.svproject.domain.address;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.techeer.svproject.domain.address.vo.AddressVo;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -16,6 +14,8 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @Entity
+@EqualsAndHashCode
+@ToString
 public class Address {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -47,5 +47,15 @@ public class Address {
         this.city = city;
         this.street = street;
         this.zipcode = zipcode;
+    }
+
+
+    public AddressVo toAddressVo() {
+        return AddressVo.builder()
+                .state(state)
+                .city(city)
+                .zipcode(zipcode)
+                .street(street)
+                .build();
     }
 }
