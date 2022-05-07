@@ -30,13 +30,13 @@ public class OrderController {
 
     @ResponseBody
     @PostMapping
-    public ResponseEntity<OrderResponseDto> save(@RequestBody OrderCreateDto requestDto) {
+    public ResponseEntity<?> save(@RequestBody OrderCreateDto requestDto) {
         User user = userService.findById(requestDto.getUserId());
         Order entity = orderService.save(orderMapper.toEntity(requestDto), user);
         try {
             return new ResponseEntity<>(orderMapper.toResponseDto(entity), HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity(ErrorResponseDto.fromEntity("FORBIDDEN", "주문 생성에 오류가 발생하였습니다."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(ErrorResponseDto.fromEntity("FORBIDDEN", "주문 생성에 오류가 발생하였습니다."), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -51,7 +51,7 @@ public class OrderController {
 
     @ResponseBody
     @GetMapping
-    public ResponseEntity<List<OrderResponseDto>> getByUserId(@RequestParam String userEmail) {
+    public ResponseEntity<?> getByUserId(@RequestParam String userEmail) {
 
         List<OrderResponseDto> entity = orderService.findAllByEmail(userEmail)
                 .stream()
@@ -60,7 +60,7 @@ public class OrderController {
         try {
             return new ResponseEntity<>(entity, HttpStatus.ACCEPTED);
         } catch (Exception e) {
-            return new ResponseEntity(ErrorResponseDto.fromEntity("FORBIDDEN", "주문 목록 조회에 오류가 발생하였습니다."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(ErrorResponseDto.fromEntity("FORBIDDEN", "주문 목록 조회에 오류가 발생하였습니다."), HttpStatus.BAD_REQUEST);
         }
     }
 

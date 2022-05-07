@@ -23,7 +23,7 @@ public class AddressController {
 
     // 조회
     @GetMapping(API_PREFIX + "/address-list")
-    public ResponseEntity getAddress(@RequestParam String userEmail) {
+    public ResponseEntity<AddressReadDto> getAddress(@RequestParam String userEmail) {
         Address address = addressService.getAddress(userEmail);
         AddressReadDto adReadDto = new AddressReadDto();
         return ResponseEntity
@@ -33,7 +33,7 @@ public class AddressController {
 
     // 수정
     @PutMapping(API_PREFIX + "/address-list/{address-id}")
-    public ResponseEntity updateAddress(@PathVariable(value = "address-id") UUID addressId,
+    public ResponseEntity<AddressUpdateDto> updateAddress(@PathVariable(value = "address-id") UUID addressId,
                                         @RequestBody AddressUpdateDto adUpdateDto) {
         Address address = addressService.updateAddress(addressId, adUpdateDto);
         return ResponseEntity
