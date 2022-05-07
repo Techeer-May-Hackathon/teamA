@@ -39,7 +39,7 @@ public class UserService {
     public List<UserResponseDto> findAll() {
         return userRepository.findAll()
                 .stream()
-                .map(UserResponseDto::new)
+                .map(UserResponseDto::fromEntity)
                 .collect(Collectors.toList());
     }
 
