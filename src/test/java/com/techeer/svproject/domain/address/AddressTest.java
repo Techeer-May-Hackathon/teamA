@@ -162,6 +162,8 @@ public class AddressTest {
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
 
+
+        // check mutated address
         addressUpdateDto = JsonMapper.fromMvcResult(mvcResult, AddressUpdateDto.class);
 
         assertThat(addressUpdateDto.getState()).isEqualTo("서울특별시");
@@ -169,6 +171,7 @@ public class AddressTest {
         assertThat(addressUpdateDto.getZipcode()).isEqualTo(15011);
         assertThat(addressUpdateDto.getStreet()).isEqualTo("선릉");
 
+        // check mutated entity
         address = addressService.getAddress(userSaveDto.getEmail());
 
         assertThat(address.getState()).isEqualTo("서울특별시");
