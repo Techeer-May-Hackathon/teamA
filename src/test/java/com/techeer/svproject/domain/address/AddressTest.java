@@ -155,7 +155,7 @@ public class AddressTest {
                 .zipcode(15011)
                 .street("선릉").build();
 
-        MvcResult mvcResult = mockMvc.perform(post(getUpdatePath(address.getAddressId()))
+        MvcResult mvcResult = mockMvc.perform(put(getUpdatePath(address.getAddressId()))
                         .content(JsonMapper.asJsonString(addressUpdateDto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
