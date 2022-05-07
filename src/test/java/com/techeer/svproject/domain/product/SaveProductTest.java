@@ -1,10 +1,13 @@
+/*
+상품 저장
+ */
+
+
 package com.techeer.svproject.domain.product;
 
 import com.techeer.svproject.domain.order.dto.OrderResponseDto;
-import com.techeer.svproject.domain.order.service.OrderService;
 import com.techeer.svproject.domain.product.dto.ProductSaveDto;
 import com.techeer.svproject.domain.address.Address;
-import com.techeer.svproject.domain.product.service.ProductService;
 import com.techeer.svproject.domain.user.User;
 import com.techeer.svproject.domain.user.UserRepository;
 import com.techeer.svproject.domain.user.dto.UserResponseDto;
@@ -38,30 +41,29 @@ public class SaveProductTest {
     @Autowired
     private MockMvc mockMvc;
 
-    //@Autowired
-    //private ProductService productService;
-    //@Autowired
-    //private OrderService OrderService;
 
     @Autowired
     private UserRepository userRepository;
 
-    private final String OrderPostPath = API_PREFIX + "/orders";
 
-    private final String ProductPostProduct = API_PREFIX + "/products";  //삼품 저장 api
+    private final String testUserPath = API_PREFIX + "/users";
 
-    private final String UserPostPath = API_PREFIX + "/users";
+    private final String testOrderPath = API_PREFIX + "/orders";
+
+    private final String testProductPath = API_PREFIX + "/products";
 
 
     @Test
     @Transactional
-    public void testPostProduct() throws Exception {
+    public void testProductExample() throws Exception {                 //예시로 주는 값 (product 공통)
+
+        //User 정보 입력
         User user = User.builder()
                 .lastName("Dayon")
                 .firstName("Hong")
                 .email("dayon@gmail.com")
                 .phoneNumber(12345678)
-                .password("12345678")           //빼먹었던 부분!
+                .password("12345678")
                 .address(Address.builder()
                         .state("경기도")
                         .city("부천시")
@@ -69,18 +71,35 @@ public class SaveProductTest {
                         .street("상동").build())
                 .build();
 
-        user = userRepository.saveAndFlush(user);                           //user 레포지토리 저장 password추가 -> 오류 해결
+        user = userRepository.saveAndFlush(user);
 
         UserResponseDto userResponseDto = UserResponseDto.fromEntity(user);
 
+        // User API 호출
+        MvcResult mvcResult = mockMvc.perform(post(testUserPath)
+                        .content(JsonMapper.asJsonString(user))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        UserResponseIdDto userResponseIdDto = JsonMapper.fromMvcResult(mvcResult, UserResponseIdDto.class);
+        //find UUID
+        UUID userId = userResponseIdDto.getId();
+
+
+
+
+        //Order 정보 입력
         OrderResponseDto orderResponseDto = OrderResponseDto.builder()
                 .id(UUID.randomUUID())
                 .userId(user.getId())
                 .build();
 
 
-        // OrderController에서 Order POST API 호출
-        MvcResult mvcResult = mockMvc.perform(post(OrderPostPath)
+        // OrderController에서 Order POST API 호출                   
+        mvcResult = mockMvc.perform(post(testOrderPath)
                         .content(JsonMapper.asJsonString(orderResponseDto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -90,14 +109,13 @@ public class SaveProductTest {
 
         orderResponseDto = JsonMapper.fromMvcResult(mvcResult, OrderResponseDto.class);
 
-
+        //find UUID
+        UUID orderId = orderResponseDto.getId();
         // log.info(orderResponseDto.toString());     //상태확인
 
 
-        //find UUID
-        UUID orderId = orderResponseDto.getId();
 
-
+        //Product 정보 입력
         ProductSaveDto productSaveDto = ProductSaveDto.builder()
                 .id(UUID.randomUUID())
                 .orderId(orderId)
@@ -106,21 +124,8 @@ public class SaveProductTest {
                 .build();
 
 
-        //user API 호출
-        mvcResult = mockMvc.perform(post(UserPostPath)
-                        .content(JsonMapper.asJsonString(user))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isCreated())
-                .andReturn();
-
-        UserResponseIdDto userResponseIdDto = JsonMapper.fromMvcResult(mvcResult, UserResponseIdDto.class);
-        UUID userId = userResponseIdDto.getId();
-
-
-        // ProductController에서 Product POST API 호출
-        mvcResult = mockMvc.perform(post(ProductPostProduct)
+        //ProductController 에서 Product Post API 호출
+        mvcResult = mockMvc.perform(post(testProductPath)
                         .content(JsonMapper.asJsonString(productSaveDto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -128,11 +133,8 @@ public class SaveProductTest {
                 .andExpect(status().isCreated())
                 .andReturn();
 
-        productSaveDto = JsonMapper.fromMvcResult(mvcResult, ProductSaveDto.class);   //타입확인
+        productSaveDto = JsonMapper.fromMvcResult(mvcResult, ProductSaveDto.class);
         UUID id = productSaveDto.getId();
-
-
-
 
         // Check object fields - 값 비교
         //assertThat(productSaveDto.getId()).isEqualTo(id);
