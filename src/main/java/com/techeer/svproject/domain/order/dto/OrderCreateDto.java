@@ -1,6 +1,5 @@
 package com.techeer.svproject.domain.order.dto;
 
-import com.techeer.svproject.domain.order.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -40,5 +40,6 @@ public class OrderService {
         Order order = orderRepository.findById(id).get();
 //                .orElseThrow(
 //                        () -> new ("Developer profile not found with id=" + id));
-        orderRepository.delete(order);   }
+        orderRepository.delete(order);
+    }
 }

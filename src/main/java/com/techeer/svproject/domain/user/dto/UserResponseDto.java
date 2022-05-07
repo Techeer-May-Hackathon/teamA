@@ -21,7 +21,7 @@ public class UserResponseDto {
     private Integer phoneNumber;
     private Address address;
 
-    public UserResponseDto(User entity){
+    public UserResponseDto(User entity) {
         this.id = entity.getId();
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
@@ -40,6 +40,7 @@ public class UserResponseDto {
                 .address(user.getAddress())
                 .build();
     }
+
     public static UserResponseDto fromEntity(UUID id) {
         return UserResponseDto.builder()
                 .id(id)

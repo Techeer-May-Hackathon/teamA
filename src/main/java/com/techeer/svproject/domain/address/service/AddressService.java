@@ -1,13 +1,13 @@
 package com.techeer.svproject.domain.address.service;
+
 import com.techeer.svproject.domain.address.Address;
+import com.techeer.svproject.domain.address.AddressRepository;
 import com.techeer.svproject.domain.address.dto.request.AddressCreateDto;
 import com.techeer.svproject.domain.address.dto.request.AddressUpdateDto;
 import com.techeer.svproject.domain.user.User;
 import com.techeer.svproject.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.techeer.svproject.domain.address.AddressRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
@@ -20,9 +20,9 @@ public class AddressService {
 
     // User Address 수정
     @Transactional
-    public Address updateAddress(UUID addressId, AddressUpdateDto adu){
+    public Address updateAddress(UUID addressId, AddressUpdateDto adu) {
         Address address = addressRepository.getById(addressId);
-        address.update(adu.getState(),adu.getCity(),adu.getStreet(),adu.getZipcode());
+        address.update(adu.getState(), adu.getCity(), adu.getStreet(), adu.getZipcode());
         return addressRepository.save(address);
     }
 
@@ -34,7 +34,7 @@ public class AddressService {
 
     // User Address 조회
     @Transactional(readOnly = true)
-    public Address getAddress(String email){
+    public Address getAddress(String email) {
         User user = userRepository.findByEmail(email);
         Address address = user.getAddress();
         return address;

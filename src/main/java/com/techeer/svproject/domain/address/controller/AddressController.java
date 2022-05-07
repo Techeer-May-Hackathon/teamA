@@ -1,4 +1,5 @@
 package com.techeer.svproject.domain.address.controller;
+
 import com.techeer.svproject.domain.address.Address;
 import com.techeer.svproject.domain.address.dto.request.AddressReadDto;
 import com.techeer.svproject.domain.address.dto.request.AddressUpdateDto;
@@ -21,7 +22,7 @@ public class AddressController {
 //
 
     // 조회
-    @GetMapping(API_PREFIX +"/address-list")
+    @GetMapping(API_PREFIX + "/address-list")
     public ResponseEntity getAddress(@RequestParam String userEmail) {
         Address address = addressService.getAddress(userEmail);
         AddressReadDto adReadDto = new AddressReadDto();
@@ -31,7 +32,7 @@ public class AddressController {
     }
 
     // 수정
-    @PutMapping(API_PREFIX +"/address-list/{address-id}")
+    @PutMapping(API_PREFIX + "/address-list/{address-id}")
     public ResponseEntity updateAddress(@PathVariable(value = "address-id") UUID addressId,
                                         @RequestBody AddressUpdateDto adUpdateDto) {
         Address address = addressService.updateAddress(addressId, adUpdateDto);

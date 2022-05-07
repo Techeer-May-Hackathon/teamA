@@ -33,7 +33,9 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Product> products;
 
-    /** 주문 날짜 */
+    /**
+     * 주문 날짜
+     */
     @CreationTimestamp
     private LocalDateTime orderDate;
 

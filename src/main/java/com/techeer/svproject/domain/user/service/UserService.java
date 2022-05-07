@@ -1,6 +1,5 @@
 package com.techeer.svproject.domain.user.service;
 
-import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.techeer.svproject.domain.user.User;
 import com.techeer.svproject.domain.user.UserRepository;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
-import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -69,7 +67,7 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public UUID update(String email, UserRequestUpdateDto requestDto){
+    public UUID update(String email, UserRequestUpdateDto requestDto) {
         User user = userRepository.findByEmail(email);
         user.update(requestDto.getLastName(), requestDto.getFirstName(),
                 requestDto.getPassword(), requestDto.getPhoneNumber(),

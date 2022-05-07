@@ -4,8 +4,6 @@ import com.techeer.svproject.domain.address.Address;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Getter
 @NoArgsConstructor
 public class UserRequestUpdateDto {
@@ -15,7 +13,7 @@ public class UserRequestUpdateDto {
     private int phoneNumber;
     private Address address;
 
-    public UserRequestUpdateDto(String firstName, String lastName, String password ,int phoneNumber, Address address){
+    public UserRequestUpdateDto(String firstName, String lastName, String password, int phoneNumber, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;

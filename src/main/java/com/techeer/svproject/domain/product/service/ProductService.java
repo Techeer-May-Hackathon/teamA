@@ -8,7 +8,6 @@ import com.techeer.svproject.domain.product.dto.ProductUpdateDto;
 import com.techeer.svproject.domain.product.entity.Product;
 import com.techeer.svproject.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +23,7 @@ public class ProductService {
     private final OrderRepository orderRepository;
 
     @Transactional
-    public Product save(ProductSaveDto productSaveDto){
+    public Product save(ProductSaveDto productSaveDto) {
         Product product = productSaveDto.toEntity();
         Order order = orderRepository.findById(productSaveDto.getOrderId()).get();
         product.setOrder(order);
@@ -32,7 +31,7 @@ public class ProductService {
     }
 
     @Transactional
-    public Product update(UUID id, ProductUpdateDto productUpdateDto){
+    public Product update(UUID id, ProductUpdateDto productUpdateDto) {
         Product product = productRepository.findById(id).get();
         product.update(productUpdateDto.getPrice(), productUpdateDto.getProductName());
         return productRepository.save(product);
@@ -44,7 +43,7 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Product> findById(UUID id){
+    public Optional<Product> findById(UUID id) {
         return productRepository.findById(id);
     }
 
@@ -54,7 +53,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void delete(UUID id){
+    public void delete(UUID id) {
         Product product = productRepository.findById(id).get();
         productRepository.delete(product);
     }

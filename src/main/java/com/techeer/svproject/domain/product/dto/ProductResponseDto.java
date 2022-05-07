@@ -17,7 +17,7 @@ public class ProductResponseDto {
     private int price;
     private String productName;
 
-    public ProductResponseDto(Product entity){
+    public ProductResponseDto(Product entity) {
         this.id = entity.getId();
         this.price = entity.getPrice();
         this.productName = entity.getProductName();

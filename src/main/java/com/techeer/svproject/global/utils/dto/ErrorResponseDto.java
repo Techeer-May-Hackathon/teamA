@@ -13,7 +13,7 @@ public class ErrorResponseDto {
     private String message;
     private String status;
 
-    public static ErrorResponseDto fromEntity(String status, String message){
+    public static ErrorResponseDto fromEntity(String status, String message) {
         return ErrorResponseDto.builder()
                 .status(status)
                 .message(message)

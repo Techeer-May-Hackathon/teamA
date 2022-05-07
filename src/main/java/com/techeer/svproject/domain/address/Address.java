@@ -1,10 +1,15 @@
 package com.techeer.svproject.domain.address;
+
 import lombok.Builder;
-import lombok.Setter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.UUID;
 
 @Setter
@@ -37,7 +42,7 @@ public class Address {
         this.zipcode = zipcode;
     }
 
-    public void update(String state, String city, String street, int zipcode){
+    public void update(String state, String city, String street, int zipcode) {
         this.state = state;
         this.city = city;
         this.street = street;

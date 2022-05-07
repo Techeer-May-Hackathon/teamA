@@ -1,9 +1,11 @@
 package com.techeer.svproject.domain.address.dto.request;
+
 import com.techeer.svproject.domain.address.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
 @Getter
@@ -17,7 +19,7 @@ public class AddressUpdateDto {
     private String street;
     private int zipcode;
 
-    public static AddressUpdateDto fromEntity(Address ads){
+    public static AddressUpdateDto fromEntity(Address ads) {
         return AddressUpdateDto.builder()
                 .addressId(ads.getAddressId())
                 .state(ads.getState())

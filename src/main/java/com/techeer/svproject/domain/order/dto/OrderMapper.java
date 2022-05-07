@@ -3,8 +3,6 @@ package com.techeer.svproject.domain.order.dto;
 import com.techeer.svproject.domain.order.entity.Order;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class OrderMapper {
 

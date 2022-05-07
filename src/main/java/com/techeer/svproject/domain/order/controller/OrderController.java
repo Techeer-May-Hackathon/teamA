@@ -1,7 +1,5 @@
 package com.techeer.svproject.domain.order.controller;
 
-import com.techeer.svproject.domain.address.Address;
-import com.techeer.svproject.domain.address.dto.request.AddressUpdateDto;
 import com.techeer.svproject.domain.order.dto.OrderCreateDto;
 import com.techeer.svproject.domain.order.dto.OrderMapper;
 import com.techeer.svproject.domain.order.dto.OrderResponseDto;
@@ -23,7 +21,7 @@ import static com.techeer.svproject.global.utils.Constants.API_PREFIX;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(API_PREFIX+"/orders")
+@RequestMapping(API_PREFIX + "/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -37,8 +35,7 @@ public class OrderController {
         Order entity = orderService.save(orderMapper.toEntity(requestDto), user);
         try {
             return new ResponseEntity<>(orderMapper.toResponseDto(entity), HttpStatus.CREATED);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity(ErrorResponseDto.fromEntity("FORBIDDEN", "주문 생성에 오류가 발생하였습니다."), HttpStatus.BAD_REQUEST);
         }
     }
@@ -56,14 +53,13 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<OrderResponseDto>> getByUserId(@RequestParam String userEmail) {
 
-      List<OrderResponseDto> entity = orderService.findAllByEmail(userEmail)
-              .stream()
-              .map(orderMapper::toResponseDto)
-              .collect(Collectors.toList());
-      try {
+        List<OrderResponseDto> entity = orderService.findAllByEmail(userEmail)
+                .stream()
+                .map(orderMapper::toResponseDto)
+                .collect(Collectors.toList());
+        try {
             return new ResponseEntity<>(entity, HttpStatus.ACCEPTED);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity(ErrorResponseDto.fromEntity("FORBIDDEN", "주문 목록 조회에 오류가 발생하였습니다."), HttpStatus.BAD_REQUEST);
         }
     }
