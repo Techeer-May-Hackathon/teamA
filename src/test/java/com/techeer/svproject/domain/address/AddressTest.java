@@ -93,9 +93,6 @@ public class AddressTest {
 
         assertThat(registered).isNotNull();
 
-        log.info(userSaveDto.toString());
-        log.info(registered.toString());
-
         // Check object fields
         assertThat(registered.getFirstName()).isEqualTo(userSaveDto.getFirstName());
         assertThat(registered.getLastName()).isEqualTo(userSaveDto.getLastName());
