@@ -80,9 +80,9 @@ public class AddressTest {
                         .content(JsonMapper.asJsonString(userSaveDto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isCreated())
-                .andReturn();
+                        .andDo(print())
+                        .andExpect(status().isCreated())
+                        .andReturn();
 
         UserResponseIdDto userResponseIdDto = JsonMapper.fromMvcResult(mvcResult, UserResponseIdDto.class);
 
@@ -117,9 +117,9 @@ public class AddressTest {
         MvcResult mvcResult = mockMvc.perform(get(getPath)
                         .accept(MediaType.APPLICATION_JSON)
                         .queryParam("userEmail", userSaveDto.getEmail()))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andReturn();
+                        .andDo(print())
+                        .andExpect(status().isOk())
+                        .andReturn();
 
         AddressReadDto addressReadDto = JsonMapper.fromMvcResult(mvcResult, AddressReadDto.class);
         AddressCreateDto address = userSaveDto.getAddress();
